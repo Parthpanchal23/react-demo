@@ -17,6 +17,7 @@ import {
   CurrenctConvertor,
   User,
 } from "./component/index.tsx";
+import Loading from "./component/loading.tsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -50,11 +51,27 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="" element={<App />} />
-      <Route path="/currency" element={<CurrenctConvertor />} />
-      <Route path="/password" element={<PasswordGenerator />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="user/:userid" element={<User />} />
+      <Route path="" element={<App />} errorElement={<ErrorPage />} />
+      <Route
+        path="/currency"
+        element={<CurrenctConvertor />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="/password"
+        element={<PasswordGenerator />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="/contact"
+        element={<Contact />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="user/:userid"
+        element={<User />}
+        errorElement={<ErrorPage />}
+      />
     </Route>
   )
 );
