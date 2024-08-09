@@ -9,4 +9,5 @@ const UserContextProvider = ({ children }: any) => {
     </UserContext.Provider>
   );
 };
+
 export default UserContextProvider;

@@ -7,7 +7,6 @@ const Login = () => {
   const { setUser }: any = useContext(UserContext);
 
   const handleSubmit = (e) => {
-    console.log("e", e);
     // e.prevent.default();
     setUser({ username, password });
   };
