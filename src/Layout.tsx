@@ -1,12 +1,14 @@
-import React from "react";
 import Navbar from "./component/navbar.tsx";
 import { Outlet } from "react-router-dom";
+import UserContextProvider from "./context/UserContextProvider.tsx";
 
 const Layout = () => {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <UserContextProvider>
+        <Navbar />
+        <Outlet />
+      </UserContextProvider>
     </>
   );
 };

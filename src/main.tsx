@@ -16,8 +16,10 @@ import {
   PasswordGenerator,
   CurrenctConvertor,
   User,
+  Profile,
 } from "./component/index.tsx";
-import Loading from "./component/loading.tsx";
+// import Loading from "./component/loading.tsx";
+import Login from "./component/login.tsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -55,6 +57,12 @@ const router = createBrowserRouter(
       <Route
         path="/currency"
         element={<CurrenctConvertor />}
+        errorElement={<ErrorPage />}
+      />
+      <Route path="/login" element={<Login />} errorElement={<ErrorPage />} />
+      <Route
+        path="/profile"
+        element={<Profile />}
         errorElement={<ErrorPage />}
       />
       <Route

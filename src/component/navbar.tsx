@@ -1,6 +1,3 @@
-// import { NavLink } from "react-router-dom";
-
-// const Navbar = () => {
 const Listdata = [
   {
     href: "/",
@@ -19,56 +16,52 @@ const Listdata = [
     name: "Contact us",
   },
 ];
-//   return (
-//     <nav className="container flex justify-between text-white mx-6">
-//       {Listdata.map((item) => (
-//         <NavLink
-//           key={item.name}
-//           to={item?.href}
-//           className={({ isActive }) =>
-//             `block py-2 pr-4 pl-3  duration-200 ${
-//               isActive ? "text-white" : "text-gray-500"
-//             } border-b border-gray-100 hover:bg-white-50  lg:border-0 hover:text-blue-600  lg:p-0 hover:bg-white hover:px-2 hover:border rounded-md transition duration-700 ease-in-out`
-//           }
-//         >
-//           {item?.name}
-//         </NavLink>
-//       ))}
-//     </nav>
-//   );
-// };
 
-// export default Navbar;
-
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 export default function Navbar() {
+  const { user, setUser }: any = useContext(UserContext);
   return (
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
+          <NavLink to="/" className="flex items-center">
             <img
               src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
               className="mr-3 h-12"
               alt="Logo"
             />
-          </Link>
+          </NavLink>
 
-          {/* <div className="flex items-center lg:order-2">
-            <Link
-              to="#"
-              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-            >
-              Log in
-            </Link>
-            <Link
-              to="#"
-              className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-            >
-              Get started
-            </Link>
-          </div> */}
+          <div className="flex items-center lg:order-2">
+            {user?.username == "" ? (
+              <NavLink
+                to="/login"
+                className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+              >
+                Log in
+              </NavLink>
+            ) : (
+              <div className="flex  flex-col text-center">
+                <button
+                  className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  onClick={() => {
+                    setUser({ username: "", password: "" });
+                  }}
+                >
+                  logout
+                </button>
+                {/* <Link
+                  to="#"
+                  className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                >
+                  logout
+                </Link> */}
+              </div>
+            )}
+          </div>
           <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
