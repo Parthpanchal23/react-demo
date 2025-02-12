@@ -1,15 +1,27 @@
-import { useState, useContext } from "react";
+import { useState, useContext,FC } from "react";
 import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login:FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const { setUser }: any = useContext(UserContext);
 
-  const handleSubmit = (e) => {
-    // e.prevent.default();
-    setUser({ username, password });
+  const handleSubmit = () => {
+    if(!username && !password)
+    {
+      alert("Both field is required");
+    } else if(!username){
+        alert("UserName is required");
+    } else if (!password) {
+        alert("Password is required");
+    } else{
+      setUser({ username, password });
+      navigate("../");
+    }
   };
+
   return (
     <div>
       <div>
@@ -31,7 +43,7 @@ const Login = () => {
                   Login
                 </h1>
                 <div className="flex flex-col">
-                  <label for="name" className="hidden">
+                  <label htmlFor="name" className="hidden">
                     username
                   </label>
                   <input
@@ -40,6 +52,7 @@ const Login = () => {
                     id="username"
                     placeholder="User Name"
                     value={username}
+                    required ={true}
                     onChange={(e) => {
                       setUsername(e.target.value);
                     }}
@@ -48,7 +61,7 @@ const Login = () => {
                 </div>
 
                 <div className="flex flex-col mt-2">
-                  <label for="password" className="hidden">
+                  <label htmlFor="password" className="hidden">
                     Password
                   </label>
                   <input
@@ -57,6 +70,7 @@ const Login = () => {
                     id="password"
                     placeholder="Password"
                     value={password}
+                    required={true}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}

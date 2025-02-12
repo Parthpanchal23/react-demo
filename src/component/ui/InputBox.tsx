@@ -1,6 +1,17 @@
-import { useId } from "react";
+import { useId,memo ,FC} from "react";
 
-const InputBox = ({
+interface InputProps {
+  label?:string;
+  amount?:number;
+  onAmountChange:(a?:any)=>void;
+  onCurrencyChange:(b?:any)=> void;
+  currencyOptions?:string[];
+  selectCurrency?:string;
+  amountDisable?:boolean;
+  currencyDisable?:boolean;
+  className?:string;
+}
+const InputBox:FC<InputProps> = ({
   label = "label",
   amount = 0,
   onAmountChange,
@@ -24,10 +35,11 @@ const InputBox = ({
         </label>
         <input
           id={amountInputId}
-          className="outline-none w-full bg-transparent py-1.5"
+          className="border-2 p-3 rounded-md w-full bg-transparent py-1.5"
           type="number"
           placeholder="Amount"
           disabled={amountDisable}
+          min={0}
           value={amount}
           onChange={(e) =>
             onAmountChange && onAmountChange(Number(e.target.value))
@@ -42,8 +54,8 @@ const InputBox = ({
           onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
           disabled={currencyDisable}
         >
-          {currencyOptions.map((currency) => (
-            <option key={currency} value={currency}>
+          {currencyOptions?.map((currency:string,i:number) => (
+            <option key={i} value={currency}>
               {currency}
             </option>
           ))}
@@ -53,4 +65,4 @@ const InputBox = ({
   );
 };
 
-export default InputBox;
+export default memo(InputBox);

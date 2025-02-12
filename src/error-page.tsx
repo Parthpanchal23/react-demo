@@ -1,7 +1,10 @@
 import { useRouteError } from "react-router-dom";
-
+interface errorType {
+  statusText?:string;
+  message?:string;
+}
 function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError() as errorType;
   return (
     <div className="flex flex-col justify-center items-center text-white bg-orange-400 border rounded-md p-2 ">
       <h1>Oops!</h1>

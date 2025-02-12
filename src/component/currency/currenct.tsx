@@ -1,14 +1,15 @@
-import { useState } from "react";
-// import img from "../assets/banner.jpg";
+import { useState ,FC} from "react";
 import useCurrecyInfo from "../../hooks/useCurrenctinfo";
 import InputBox from "../ui/InputBox";
-const CurrenctConvertor = () => {
-  const [amount, setAmount] = useState();
-  const [from, setFrom] = useState("usd");
-  const [to, setTo] = useState("inr");
-  const [convertedAmount, setConvertedAmount] = useState(0);
-  const currencyInfo = useCurrecyInfo(from);
+
+const CurrenctConvertor:FC = () => {
+  const [amount, setAmount] = useState<number|undefined>(0);
+  const [from, setFrom] = useState<string>("usd");
+  const [to, setTo] = useState<string>("inr");
+  const [convertedAmount, setConvertedAmount] = useState<number|undefined>(0);
+  const currencyInfo = useCurrecyInfo(from) as string[];
   const options = Object.keys(currencyInfo);
+ 
 
   const swap = () => {
     setFrom(to);
@@ -18,14 +19,23 @@ const CurrenctConvertor = () => {
   };
 
   const convert = () => {
-    setConvertedAmount(amount * currencyInfo[to]);
+    if(amount && amount != undefined)
+    {
+      let matchAmount =((currencyInfo[to] / currencyInfo[from]) * amount).toFixed(2)
+      // setConvertedAmount(amount * currencyInfo[to]);
+      if(matchAmount)
+      {
+        setConvertedAmount(matchAmount);
+      }
+    }else {
+    alert("from value is required");
+    }
   };
+
   return (
     <div
-      className="  flex flex-col h-svh justify-center content-center "
-      // style={{ backgroundImage: `url(${img})` }}
+      className="flex flex-col h-svh justify-center content-center"
     >
-      {/* <h1 className="text-3xl text-white ">Currency converter app</h1> */}
       <div
         className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
         style={{
@@ -45,9 +55,9 @@ const CurrenctConvertor = () => {
                   label="From"
                   amount={amount}
                   currencyOptions={options}
-                  onCurrencyChange={(currency) => setAmount(amount)}
+                  onCurrencyChange={() => setAmount(amount)}
                   selectCurrency={from}
-                  onAmountChange={(amount) => setAmount(amount)}
+                  onAmountChange={(sd) => setAmount(sd)}
                 />
               </div>
               <div className="relative w-full h-0.5">
@@ -64,7 +74,7 @@ const CurrenctConvertor = () => {
                   label="To"
                   amount={convertedAmount}
                   currencyOptions={options}
-                  onCurrencyChange={(currency) => setTo(currency)}
+                  onCurrencyChange={(currency:any) => setTo(currency)}
                   selectCurrency={to}
                   amountDisable
                 />

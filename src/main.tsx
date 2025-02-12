@@ -15,8 +15,8 @@ import {
   Contact,
   PasswordGenerator,
   CurrenctConvertor,
-  User,
-  Profile,
+  // User,
+  // Profile,
 } from "./component/index.tsx";
 // import Loading from "./component/loading.tsx";
 import Login from "./component/login.tsx";
@@ -61,11 +61,6 @@ const router = createBrowserRouter(
       />
       <Route path="/login" element={<Login />} errorElement={<ErrorPage />} />
       <Route
-        path="/profile"
-        element={<Profile />}
-        errorElement={<ErrorPage />}
-      />
-      <Route
         path="/password"
         element={<PasswordGenerator />}
         errorElement={<ErrorPage />}
@@ -73,11 +68,6 @@ const router = createBrowserRouter(
       <Route
         path="/contact"
         element={<Contact />}
-        errorElement={<ErrorPage />}
-      />
-      <Route
-        path="user/:userid"
-        element={<User />}
         errorElement={<ErrorPage />}
       />
     </Route>

@@ -1,13 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState,FC } from "react";
 
-const PasswordGenerator = () => {
+const PasswordGenerator:FC = () => {
   const [length, setLength] = useState(8);
-  const [numberAllowed, setNumberAllowed] = useState(false);
-  const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
   const [color, setColor] = useState("#808000");
   const [textColor, settextColor] = useState("#ffffff");
-  const passwordRef = useRef(null);
+  const [charAllowed, setCharAllowed] = useState(false);
+  const [numberAllowed, setNumberAllowed] = useState(false);
+  
+ 
+  const passwordRef = useRef<HTMLInputElement|null>(null);
+  
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -35,8 +38,8 @@ const PasswordGenerator = () => {
   }, [length, numberAllowed, charAllowed, passwordGenerator]);
 
   return (
-    <div className=" flex flex-col h-svh content-center">
-      <div className="flex w-full max-w-md mx-auto shadow-md rounded-lg p-4 my-8 text-white bg-gray-800">
+    <div className=" flex flex-col h-svh content-center ">
+      <div className="flex w-full max-w-md mx-auto shadow-md rounded-lg p-4 my-8 text-white bg-gray-800   ">
         <div className="px-2 ">
           <h1 className="text-white font-mono text-2xl  my-1 ">
             Home Sweet Home
@@ -46,7 +49,7 @@ const PasswordGenerator = () => {
           </p>
         </div>
 
-        <div className="h-full w-auto content-end">
+        <div className="h-full w-auto content-end ">
           <input
             type="color"
             defaultValue={color}

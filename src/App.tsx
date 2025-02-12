@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { Suspense,lazy } from "react";
 
-import Loading from "./component/loading";
+const Loading = lazy(() => import('./component/loading'));
 import { PasswordGenerator } from "./component";
 import img from "./assets/homebanner.jpg";
+
 function App() {
   return (
     <div
