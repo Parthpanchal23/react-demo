@@ -18,6 +18,11 @@ export default function Contact() {
     document.querySelector("html")?.classList.add(themeMode);
   }, [themeMode]);
 
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault(); // Prevents the form from submitting and refreshing the page
+    // Do something with the form data
+  };
+
   return (
     <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
       <div className="relative flex items-top justify-center min-h-[700px] bg-white sm:items-center sm:pt-0 ">
@@ -106,7 +111,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <form className="p-6 flex flex-col justify-center">
+              <form className="p-6 flex flex-col justify-center" onSubmit={handleSubmit}>
                 <div className="flex flex-col">
                   <label  className="hidden">
                     Full Name
