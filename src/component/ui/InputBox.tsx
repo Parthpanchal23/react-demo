@@ -3,8 +3,8 @@ import { useId,memo ,FC} from "react";
 interface InputProps {
   label?:string;
   amount?:number;
-  onAmountChange:(a?:any)=>void;
-  onCurrencyChange:(b?:any)=> void;
+  onAmountChange?:(a?:any)=>void;
+  onCurrencyChange?:(b?:any)=> void;
   currencyOptions?:string[];
   selectCurrency?:string;
   amountDisable?:boolean;

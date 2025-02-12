@@ -2,12 +2,16 @@ import { useState ,FC} from "react";
 import useCurrecyInfo from "../../hooks/useCurrenctinfo";
 import InputBox from "../ui/InputBox";
 
+interface currencyType {
+  [key: string]: number;
+}
+
 const CurrenctConvertor:FC = () => {
-  const [amount, setAmount] = useState<number|undefined>(0);
+  const [amount, setAmount] = useState<number>(0);
   const [from, setFrom] = useState<string>("usd");
   const [to, setTo] = useState<string>("inr");
-  const [convertedAmount, setConvertedAmount] = useState<number|undefined>(0);
-  const currencyInfo = useCurrecyInfo(from) as string[];
+  const [convertedAmount, setConvertedAmount] = useState<number>(0);
+  const currencyInfo = useCurrecyInfo(from) as currencyType;
   const options = Object.keys(currencyInfo);
  
 
@@ -19,18 +23,24 @@ const CurrenctConvertor:FC = () => {
   };
 
   const convert = () => {
-    if(amount && amount != undefined)
-    {
-      let matchAmount =((currencyInfo[to] / currencyInfo[from]) * amount).toFixed(2)
-      // setConvertedAmount(amount * currencyInfo[to]);
-      if(matchAmount)
-      {
-        setConvertedAmount(matchAmount);
+    if (amount && amount !== undefined) {
+      // Ensure currencyInfo[to] and currencyInfo[from] are valid numbers
+      const fromRate = currencyInfo[from];
+      const toRate = currencyInfo[to];
+  
+      if (fromRate !== undefined && toRate !== undefined) {
+        const matchAmount = ((toRate / fromRate) * amount).toFixed(2);
+        if (matchAmount) {
+          setConvertedAmount(parseFloat(matchAmount)); 
+        }
+      } else {
+        alert("Invalid currency rates for conversion.");
       }
-    }else {
-    alert("from value is required");
+    } else {
+      alert("Amount is required");
     }
   };
+  
 
   return (
     <div
